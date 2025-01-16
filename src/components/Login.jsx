@@ -23,7 +23,6 @@ const Login = () => {
 				password: loginForm.password,
 			})
 
-			console.log(result, 'kasdnjckjnskjdns')
 			// Dispatch user data to the Redux store
 			dispatch(addUser(result.data))
 
@@ -31,7 +30,6 @@ const Login = () => {
 			navigate('/')
 		} catch (error) {
 			// Error will be handled inside customAxios, but you can also do something here
-			console.log(error.message)
 		}
 	}
 

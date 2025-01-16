@@ -17,13 +17,10 @@ const Body = () => {
 
 	const fetchUser = async () => {
 		try {
-			const result = await customAxios('/profile/view', 'GET', null, true)
-			console.log(result, 'akdjnkasdjcnksank')
+			const result = await customAxios('/profile/view', 'GET', null, true, { showLoader: false, showToast: false })
 			dispatch(addUser(result))
-			console.log(result, 'akjdnkjandkjnckj')
 		} catch (error) {
 			// Handle error if needed (will be shown as toast already)
-			console.log(error)
 		}
 	}
 
@@ -41,9 +38,11 @@ const Body = () => {
 	}, [status, message])
 
 	return (
-		<div>
+		<div className='flex flex-col min-h-screen'>
 			<NavBar />
-			<Outlet />
+			<div className='flex-1 pt-10 m-5'>
+				<Outlet />
+			</div>
 			<Footer />
 			{showToast && (
 				<div className='toast toast-end z-50 mb-12'>
@@ -59,12 +58,11 @@ const Body = () => {
 					)}
 				</div>
 			)}
-			{/* Loader */}
 			{loading && (
 				<div className='fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50'>
 					<span className='loading loading-spinner loading-lg text-white'></span>
 				</div>
-			)}{' '}
+			)}
 		</div>
 	)
 }

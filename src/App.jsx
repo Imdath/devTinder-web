@@ -6,6 +6,7 @@ import Profile from './components/Profile'
 import { Provider } from 'react-redux'
 import Feed from './components/Feed'
 import ProtectedRoute from './components/ProtectedRoute'
+import Connections from './components/Connections'
 
 export default function App() {
 	return (
@@ -22,6 +23,7 @@ export default function App() {
 					>
 						<Route path='/login' element={<Login />} />
 						<Route path='/' element={<Feed />} />
+						<Route path='/connections' element={<Connections />} />
 						<Route path='/profile' element={<Profile />} />
 					</Route>
 				</Routes>
