@@ -1,10 +1,16 @@
+import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom'
+import { BASE_URL } from '../utils/constants'
+import { removeUser } from '../utils/userSlice'
+import customAxios from '../utils/customAxios'
 
 const NavBar = () => {
 	const [theme, setTheme] = useState('cupcake') // Default theme
 	const { user } = useSelector((store) => store.user)
+	const navigate = useNavigate()
+	const dispatch = useDispatch()
 
 	// Load saved theme from localStorage on mount
 	useEffect(() => {
@@ -19,6 +25,16 @@ const NavBar = () => {
 		setTheme(newTheme)
 		document.documentElement.setAttribute('data-theme', newTheme)
 		localStorage.setItem('theme', newTheme)
+	}
+
+	const handleLogOut = async () => {
+		try {
+			await customAxios('/logout', 'POST', null)
+			dispatch(removeUser())
+			navigate('/login')
+		} catch (error) {
+			console.log(error)
+		}
 	}
 
 	return (
@@ -65,7 +81,7 @@ const NavBar = () => {
 							<li>
 								<a>Settings</a>
 							</li>
-							<li>
+							<li onClick={handleLogOut}>
 								<a>Logout</a>
 							</li>
 						</ul>

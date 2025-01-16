@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux'
 import { addUser } from '../utils/userSlice'
 import { useNavigate } from 'react-router-dom'
 import { BASE_URL } from '../utils/constants'
+import customAxios from '../utils/customAxios'
 
 const Login = () => {
 	const dispatch = useDispatch()
@@ -16,20 +17,26 @@ const Login = () => {
 
 	const handleOnLogin = async () => {
 		try {
-			const result = await axios.post(
-				BASE_URL + '/login',
-				{ emailId: loginForm.email, password: loginForm.password },
-				{ withCredentials: true }
-			)
-			dispatch(addUser(result.data.data))
+			// Call the login API using customAxios
+			const result = await customAxios('/login', 'POST', {
+				emailId: loginForm.email,
+				password: loginForm.password,
+			})
+
+			console.log(result, 'kasdnjckjnskjdns')
+			// Dispatch user data to the Redux store
+			dispatch(addUser(result.data))
+
+			// Navigate to home page after successful login
 			navigate('/')
 		} catch (error) {
+			// Error will be handled inside customAxios, but you can also do something here
 			console.log(error.message)
 		}
 	}
 
 	return (
-		<div className='flex justify-center items-center my-10'>
+		<div className='flex justify-center my-10'>
 			<div className='card bg-base-300 w-96 shadow-xl'>
 				<div className='card-body'>
 					<h2 className='card-title justify-center'>Login</h2>
