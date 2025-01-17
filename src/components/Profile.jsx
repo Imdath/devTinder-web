@@ -12,12 +12,9 @@ const Profile = () => {
 		setProfileForm((prev) => ({ ...prev, [name]: value }))
 	}
 
-	console.log({ ...profileForm }, 'kdcnjsacnkjdnskasndc')
-
 	const handleSaveProfile = async () => {
 		try {
-			const result = await customAxios('/profile/edit', 'PATCH', { ...profileForm }, true)
-			console.log(result, 'kajcnkjnkjadnckjadn')
+			await customAxios('/profile/edit', 'PATCH', { ...profileForm }, true)
 		} catch (error) {
 			// error
 		}
