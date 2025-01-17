@@ -1,7 +1,17 @@
 import React from 'react'
+import customAxios from '../utils/customAxios'
 
-const UserCard = ({ user }) => {
-	const { firstName, lastName, age, gender, about, photoUrl } = user
+const UserCard = ({ user, fetchFeed }) => {
+	const { _id, firstName, lastName, age, gender, about, photoUrl } = user
+
+	const handleSendRequest = async (status, requestId) => {
+		try {
+			await customAxios(`/request/send/${status}/${requestId}`, 'POST', null, true)
+			fetchFeed()
+		} catch (error) {
+			// error
+		}
+	}
 
 	return (
 		user && (
@@ -14,8 +24,12 @@ const UserCard = ({ user }) => {
 					{gender && age && <p>{age + ', ' + gender}</p>}
 					{about && <p>{about}</p>}
 					<div className='card-actions justify-center my-4'>
-						<button className='btn btn-primary'>Ignore</button>
-						<button className='btn btn-secondary'>Interested</button>
+						<button className='btn btn-primary' onClick={() => handleSendRequest('ignored', _id)}>
+							Ignore
+						</button>
+						<button className='btn btn-secondary' onClick={() => handleSendRequest('interested', _id)}>
+							Interested
+						</button>
 					</div>
 				</div>
 			</div>

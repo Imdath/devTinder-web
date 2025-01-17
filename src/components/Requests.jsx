@@ -36,7 +36,7 @@ const Requests = () => {
 			const { photoUrl, firstName, age, gender, about } = request.fromUserId
 
 			return (
-				<div key={_id} className='card bg-base-300 text-neutral-content w-80 m-2'>
+				<div key={_id} className='card bg-base-300 text-base-content w-80 m-2'>
 					<div className='card-body flex flex-row align-center text-center'>
 						{/* Image with rounded corners */}
 						<div className='flex-shrink-0'>

@@ -22,7 +22,7 @@ const Feed = () => {
 		fetchFeed()
 	}, [])
 
-	return <div className='flex justify-center my-10'>{feed?.length > 0 && <UserCard user={feed[0]} />}</div>
+	return <div className='flex justify-center my-10'>{feed?.length > 0 && <UserCard user={feed[0]} fetchFeed={fetchFeed} />}</div>
 }
 
 export default Feed
