@@ -28,6 +28,9 @@
 -   Edit profile feature
 -   Show toast message on save of profile
 -   See all my connections
+-   New page - see all my connections
+-   New page - see all my requests
+-   Feature - accept/reject connection request
 
 Body
 

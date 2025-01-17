@@ -7,12 +7,19 @@ const Requests = () => {
 	const { requests } = useSelector((store) => store.requests)
 	const dispatch = useDispatch()
 
-	console.log(requests)
-
 	const fetchRequests = async () => {
 		try {
 			const result = await customAxios('/user/requests/received', 'GET', null, true, { showLoader: true, showToast: false })
 			dispatch(addRequests(result.data))
+		} catch (error) {
+			// error
+		}
+	}
+
+	const reviewRequest = async (status, requestId) => {
+		try {
+			await customAxios(`/request/review/${status}/${requestId}`, 'POST', null, true)
+			fetchRequests()
 		} catch (error) {
 			// error
 		}
@@ -46,8 +53,12 @@ const Requests = () => {
 
 					{/* Buttons centered below */}
 					<div className='card-actions justify-center mb-4'>
-						<button className='btn btn-secondary'>Accept</button>
-						<button className='btn btn-primary'>Deny</button>
+						<button className='btn btn-secondary' onClick={() => reviewRequest('accepted', _id)}>
+							Accept
+						</button>
+						<button className='btn btn-primary' onClick={() => reviewRequest('rejected', _id)}>
+							Reject
+						</button>
 					</div>
 				</div>
 			)
