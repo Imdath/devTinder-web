@@ -8,6 +8,7 @@ import Feed from './components/Feed'
 import ProtectedRoute from './components/ProtectedRoute'
 import Connections from './components/Connections'
 import Requests from './components/Requests'
+import SignUp from './components/SignUp'
 
 export default function App() {
 	return (
@@ -23,6 +24,7 @@ export default function App() {
 						}
 					>
 						<Route path='/login' element={<Login />} />
+						<Route path='/signup' element={<SignUp />} />
 						<Route path='/' element={<Feed />} />
 						<Route path='/connections' element={<Connections />} />
 						<Route path='/profile' element={<Profile />} />

@@ -6,11 +6,15 @@ const ProtectedRoute = ({ children }) => {
 	const cookie = getCookie('token')
 	const location = useLocation()
 
-	if (!cookie && location.pathname !== '/login') {
-		return <Navigate to={'/login'} />
+	if (!cookie) {
+		if (location.pathname === '/login' || location.pathname === '/signup') {
+			return children
+		} else {
+			return <Navigate to='/login' />
+		}
 	}
 
-	if (cookie && location.pathname === '/login') {
+	if (cookie && (location.pathname === '/login' || location.pathname === '/signup')) {
 		return <Navigate to={'/'} />
 	}
 
